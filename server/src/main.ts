@@ -105,7 +105,7 @@ function setupExitTimer(): void {
 		}
 	}
 }
-setupExitTimer();
+// setupExitTimer();
 
 function null2Undefined<T>(value: T | null): T | undefined {
 	if (value === null) {
@@ -1557,10 +1557,10 @@ function _createConnection<PConsole = _, PTracer = _, PTelemetry = _, PClient = 
 	if (Is.func((input as NodeJS.ReadableStream).read) && Is.func((input as NodeJS.ReadableStream).on)) {
 		let inputStream = <NodeJS.ReadableStream>input;
 		inputStream.on('end', () => {
-			process.exit(shutdownReceived ? 0 : 1);
+			// process.exit(shutdownReceived ? 0 : 1);
 		});
 		inputStream.on('close', () => {
-			process.exit(shutdownReceived ? 0 : 1);
+			// process.exit(shutdownReceived ? 0 : 1);
 		});
 	}
 
@@ -1662,14 +1662,14 @@ function _createConnection<PConsole = _, PTracer = _, PTelemetry = _, PClient = 
 		if (Is.number(params.processId) && exitTimer === void 0) {
 			// We received a parent process id. Set up a timer to periodically check
 			// if the parent is still alive.
-			setInterval(() => {
-				try {
-					process.kill(params.processId, <any>0);
-				} catch (ex) {
-					// Parent process doesn't exist anymore. Exit the server.
-					process.exit(shutdownReceived ? 0 : 1);
-				}
-			}, 3000);
+			// setInterval(() => {
+			// 	try {
+			// 		process.kill(params.processId, <any>0);
+			// 	} catch (ex) {
+			// 		// Parent process doesn't exist anymore. Exit the server.
+			// 		process.exit(shutdownReceived ? 0 : 1);
+			// 	}
+			// }, 3000);
 		}
 		if (Is.string(params.trace)) {
 			tracer.trace = Trace.fromString(params.trace);
@@ -1727,9 +1727,9 @@ function _createConnection<PConsole = _, PTracer = _, PTelemetry = _, PClient = 
 			}
 		} finally {
 			if (shutdownReceived) {
-				process.exit(0);
+				// process.exit(0);
 			} else {
-				process.exit(1);
+				// process.exit(1);
 			}
 		}
 	});
